@@ -11,6 +11,8 @@ class: 'text-center'
 lineNumbers: false
 aspectRatio: '16_/9'
 routerMode: 'hash'
+materia: INFORMATICA
+as: 2022/2023
 version: '1.0.0'
 ---  
 
