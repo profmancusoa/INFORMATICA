@@ -3,7 +3,8 @@ theme: default
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 #background: https://source.unsplash.com/collection/94734566/1920x1080
-background: https://source.unsplash.com/8OyKWQgBsKQ/1920x1080
+#background: https://source.unsplash.com/8OyKWQgBsKQ/960x540
+background: /media/intro00.jpg
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
@@ -14,7 +15,7 @@ aspectRatio: '16_/9'
 routerMode: 'hash'
 materia: INFORMATICA
 as: 2022/2023
-version: '1.0.0'
+version: '1.0.1'
 
 ---  
 
@@ -87,8 +88,7 @@ Ama smanettare e risolvere qualsiasi problema con il computer
 Cosa voglio diventare?
 
 <img src="/media/intro01.jpg" width="300" style="float: left;">
-<img src="/media/intro02.jpg" width="450" style="float: right;">
-
+<img src="/media/intro02.webp" width="450" style="float: right;">
 
 ---
 
@@ -146,7 +146,13 @@ ProfMancusoa
 
 <br>
 <br>
-<img src="/media/intro05.png" width="700" style="margin: auto;">
+<br>
+<br>
+<br>
+
+<img src="/media/intro05.png" width="500" style="margin: auto;">
+<img src="/media/intro08.png" width="200" style="position: relative; top: -150px; left: 700px;">
+<img src="/media/intro09.png" width="200" style="position: relative; top: -600px; left: 700px;">
 
 
 ---
@@ -258,6 +264,19 @@ a.s. 2022-2023
 
 **VENERDI'**
 - 12.10 - 13.50 (quinta e sesta ora)
+
+---
+
+# Slide
+
+&nbsp;
+
+- Le slide del corso sono disponibili online e 
+  
+  liberamente accessibili
+- [https://profmancusoa.github.io/MISC/toc.html](https://profmancusoa.github.io/MISC/toc.html)
+
+<img src="/media/intro07.png" width="500" style="margin:auto;position:relative; left: 220px; top:-200px;">
 
 ---
 
