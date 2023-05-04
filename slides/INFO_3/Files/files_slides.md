@@ -13,7 +13,7 @@ aspectRatio: '16_/9'
 routerMode: 'hash'
 materia: INFORMATICA
 as: 2022/2023
-version: '1.0.0'
+version: '1.1.0'
 ---  
 
 <!-- http://www.primeeng.it/downloads/materiale%202013/12%20Linguaggio%20C%20-%20Gestione%20di%20file.pdf
@@ -31,6 +31,9 @@ http://www.diit.unict.it/users/mpalesi/COURSES/LDI_02-03/DISPENSE/files.pdf -->
 <!-- fread https://gist.github.com/profmancusoa/7179a3d913de2303b14b076f6eb87b6d -->
 <!-- persist array https://gist.github.com/profmancusoa/1efa0c3cde1e38fd8b0a9bfe05b4c669 -->
 <!-- persist array2 https://gist.github.com/profmancusoa/39f5fc4a9845a5762db38fb34b564787 -->
+<!-- fseek 01 https://gist.github.com/profmancusoa/eb0afc3c6cea43811477a52611ad060a -->
+<!-- fseek 02 https://gist.github.com/profmancusoa/fd1b256d6e82cdcbdb2c02e432c84fdb -->
+<!-- fseek 03 https://gist.github.com/profmancusoa/60a045625dd9249538b18c57980ac761 -->
 
 
 
@@ -1450,34 +1453,277 @@ Array scritto su file
 
 # I File
 
-Persistenza di un array 
+Muoversi all'interno di un file
+
+`int fseek(FILE *stream, long offset, int whence);`
+
+fseek imposta la posizione del fiel pointer per il file puntato da *stream*
+
+- **stream**: file pointer da utilizzare
+- **offset**: sposta il puntatore al file del numero specificato di byte
+- **whence**: indica la posizione da cui partire nell'operazione di seek
+
+Nello specifico **whence** può assumere i seguenti valori:
+- **SEEK_SET**: indica l'inizio del file 
+- **SEEK_CUR**: indica la posizione corrente
+- **SEEK_END**: indica la fine del file
+
+restituisce:
+- **0**: in caso di successo
+- **-1**: in caso di errore
 
 ---
 
 # I File
 
-Persistenza di un array 
+Muoversi all'interno di un file
+
+- Dato un file binario contenente un array con i numeri da 1 a 100
+- Vediamo come legegre uno specifico numero partendo dall'inizio del file
+  
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define NUM 100
+
+int main() {
+    FILE *fp; int num;
+
+    //apertura di un file
+
+    fseek(fp, 40, SEEK_SET);
+    if(fread(&num, sizeof(int), 1, fp) == 1) {
+        printf("Il numero letto è: %d\n", num);
+    }
+    //chiusura di un file
+    return 0;
+}
+```
 
 ---
 
 # I File
 
-Persistenza di un array 
+Muoversi all'interno di un file
+
+- Eseguiamo e verifichiamo che il risultato sia quello atteso
+
+```bash
+# ./file
+
+Il numero letto è: 11
+```
+
+<br>
+
+- Questo è corretto in quanto inizalmente abbiamo spostato (fseek) di 40 byte dall'inizio del file (SEEK_SET)
+- Pertanto abbiamo saltato i primo 10 numeri (un int è 4 byte)
+- Quindi ci siamo posizionati all'inizio dell'11mo numero che viene letto da fread
+  
+---
+
+# I File
+
+Muoversi all'interno di un file
+
+- In modo analogo vediamo come posizionarsi a partire dalla fine del file
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define NUM 100
+
+int main() {
+    FILE *fp; int num;
+
+    //apertura di un file
+
+    fseek(fp, -40, SEEK_END);
+    if(fread(&num, sizeof(int), 1, fp) == 1) {
+        printf("Il numero letto è: %d\n", num);
+    }
+    //chiusura di un file
+    return 0;
+}
+```
 
 ---
 
 # I File
 
-Persistenza di un array 
+Muoversi all'interno di un file
+
+- Eseguiamo e verifichiamo che il risultato sia quello atteso
+
+```bash
+# ./file
+
+Il numero letto è: 91
+```
+
+<br>
+
+- Questo è corretto in quanto inizalmente abbiamo spostato (fseek) di -40 byte dalla fine del file (SEEK_END)
+- Pertanto abbiamo posizionato il puntatore a partire dal 10mo numero prima della file 
 
 ---
 
 # I File
 
-Persistenza di un array 
+Muoversi all'interno di un file
+
+- Vediamo ancora come posizionarsi a partire dalla posizione corrente
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define NUM 100
+
+int main() {
+    FILE *fp; int num;
+    //apertura file
+
+    fread(&num, sizeof(int), 1, fp);
+    fread(&num, sizeof(int), 1, fp);
+    fread(&num, sizeof(int), 1, fp);
+
+    fseek(fp, 8, SEEK_CUR);
+    if(fread(&num, sizeof(int), 1, fp) == 1) {
+        printf("Il numero letto è: %d\n", num);
+    }
+    ...
+    
+```
 
 ---
 
 # I File
 
-Persistenza di un array 
+Muoversi all'interno di un file
+
+```c
+    ...
+    
+    fseek(fp, -24, SEEK_CUR);
+    if(fread(&num, sizeof(int), 1, fp) == 1) {
+        printf("Il numero letto è: %d\n", num);
+    }
+
+    //chiusura file
+}
+```
+
+---
+
+# I File
+
+Muoversi all'interno di un file
+
+- Eseguiamo e verifichiamo che il risultato sia quello atteso
+
+```bash
+#/file
+
+Il numero letto è: 6
+Il numero letto è: 1
+
+```
+
+<br>
+
+- Questo è corretto in quanto inizalmente con le 3 fread abbiamo spostato il puntatore di 12 dall'inizio del file
+- Poi con fseek ci spostiamo di 8 byte dalla posizione corrente  (SEEK_CUR), di fatto posizionandoci all'inizio del numero 6
+- Dopo aver letto il numero 6, il puntatore ora è stato spostato al 24mo byte
+- Ora facendo un fseek di -24 byte dalla posizione corrente (SEEK_CUR) torniamo all'inizio del file
+- Pertanto la successiva lettura, legge il numero 1
+
+---
+
+# I File
+
+Esercizio file_08
+
+- Scrivere un programma in C, che legga il file generato come output del programma 06
+- Il programma legge un parametro numerico da linea di comando (N)
+- Il programma stampa l'N record presente nel file (assumere che N sia <= al numero di città presenti nel file)
+- Consegnare il file con nome: *|cognome|_file_08.c*
+
+---
+
+# I File
+
+Muoversi all'interno di un file
+
+`long ftell(FILE *stream);`
+
+ftell restituisce la posizione corrente all'interno del file puntato da *stream*
+
+```c
+...
+...
+    fread(&num, sizeof(int), 1, fp);
+    fread(&num, sizeof(int), 1, fp);
+    fread(&num, sizeof(int), 1, fp);
+
+    printf("Il file è in posizione: %ld\n", ftell(fp));
+...
+...
+```
+
+<br>
+
+```bash
+# ./file
+
+Il file è in posizione: 12
+```
+
+---
+
+# I File
+
+Esercizio file_09
+
+- Scrivere un programma in C, che legga da linea di comando il nome comopleto (percorso e nome) di un file
+- Il programma stampa a video la lunghezza del file 
+- Consegnare il file con nome: *|cognome|_file_09.c*
+
+---
+
+# I File
+
+Esercizio file_10
+
+- Scrivere un programma in C, che legga da linea di comando il nome comopleto (percorso e nome) di un file
+- Il programma stampa a video la lunghezza del file 
+- Il programma non può leggere il file di cui si vuole calcolare la lunghezza
+- Consegnare il file con nome: *|cognome|_file_10.c*
+
+---
+
+# I File
+
+Esercizio file_11
+
+- Scrivere un programma in linguaggio C che, permetta la gestione di un magazzino ricambi.
+- Il programma, tramite un’interfaccia utente testuale (TUI – Text User Interface), deve visualizzare un menu di scelta che permetta all’utente di:
+    1. inserire e memorizzare un ricambio con la relativa quantità
+    2. visualizzare la lista di tutti i ricambi come inserita dall’utente, visualizzando il nome del ricambio e la quantità disponibile a magazzino
+    3. visualizzare solo il ricambio N
+    4. modificare il ricambio numero N
+    5. uscire dal programma
+
+---
+
+# I File
+
+Esercizio file_11
+
+- Date le dimensioni, il programma non può leggere TUTTO il magazzino da file in memoria
+- Il programma deve operare solo su file ed ovviamente avere un ricambio in memoria per le necessarie manipolazioni
+- Il programma terminata un’operazione, rimane in attesa della pressione di un tasto e successivamente ripropone il menu di scelta. Il programma termina solo su esplicita scelta dell’utente.
+- Consegnare il file con nome: *|cognome|_file_11.c*
