@@ -22,22 +22,6 @@ https://lia.disi.unibo.it/Courses/FondT-0910-ELT/materiale/10.file.pdf
 https://www.freecodecamp.org/italian/news/gestione-dei-file-in-c-come-aprire-chiudere-e-scrivere-su-file/
 http://www.diit.unict.it/users/mpalesi/COURSES/LDI_02-03/DISPENSE/files.pdf -->
 
-<!-- gist -->
-<!-- fopen: https://gist.github.com/profmancusoa/b925aa12bd9baaabe4f8eb5161cb73f2 -->
-<!-- fclose https://gist.github.com/profmancusoa/c75eff492742b57461ec796f9c29dc66 -->
-<!-- fprintf https://gist.github.com/profmancusoa/0cf0c214ded614e4f39ec827457e074e -->
-<!-- fscanf https://gist.github.com/profmancusoa/2d708a308d7e6ab8fd3273f63a8e60a1 -->
-<!-- fwrite https://gist.github.com/profmancusoa/06cb6ac48e97e11bb08773df6a4bcf5a -->
-<!-- fread https://gist.github.com/profmancusoa/7179a3d913de2303b14b076f6eb87b6d -->
-<!-- persist array https://gist.github.com/profmancusoa/1efa0c3cde1e38fd8b0a9bfe05b4c669 -->
-<!-- persist array2 https://gist.github.com/profmancusoa/39f5fc4a9845a5762db38fb34b564787 -->
-<!-- fseek 01 https://gist.github.com/profmancusoa/eb0afc3c6cea43811477a52611ad060a -->
-<!-- fseek 02 https://gist.github.com/profmancusoa/fd1b256d6e82cdcbdb2c02e432c84fdb -->
-<!-- fseek 03 https://gist.github.com/profmancusoa/60a045625dd9249538b18c57980ac761 -->
-
-
-
-
 
 # I File
 
@@ -1727,3 +1711,20 @@ Esercizio file_11
 - Il programma deve operare solo su file ed ovviamente avere un ricambio in memoria per le necessarie manipolazioni
 - Il programma terminata un’operazione, rimane in attesa della pressione di un tasto e successivamente ripropone il menu di scelta. Il programma termina solo su esplicita scelta dell’utente.
 - Consegnare il file con nome: *|cognome|_file_11.c*
+
+---
+
+# I File
+
+- Qui i link ai gist contenente tutto il codice sorgente usato in queste slide
+  
+- [fopen:](https://gist.github.com/profmancusoa/b925aa12bd9baaabe4f8eb5161cb73f2)
+- [fclose:](https://gist.github.com/profmancusoa/c75eff492742b57461ec796f9c29dc66)
+- [fprintf:](https://gist.github.com/profmancusoa/0cf0c214ded614e4f39ec827457e074e)
+- [fscanf:](https://gist.github.com/profmancusoa/2d708a308d7e6ab8fd3273f63a8e60a1)
+- [fwrite:](https://gist.github.com/profmancusoa/06cb6ac48e97e11bb08773df6a4bcf5a)
+- [fread:](https://gist.github.com/profmancusoa/7179a3d913de2303b14b076f6eb87b6d)
+- [persist array:](https://gist.github.com/profmancusoa/1efa0c3cde1e38fd8b0a9bfe05b4c669)
+- [persist array2:](https://gist.github.com/profmancusoa/39f5fc4a9845a5762db38fb34b564787)
+- [fseek 01:](https://gist.github.com/profmancusoa/eb0afc3c6cea43811477a52611ad060a)
+- [fseek 02:](https://gist.github.com/profmancusoa/fd1b256d6e82cdcbdb2c02e432c84fdb) e [fseek 03:](https://gist.github.com/profmancusoa/60a045625dd9249538b18c57980ac761)
